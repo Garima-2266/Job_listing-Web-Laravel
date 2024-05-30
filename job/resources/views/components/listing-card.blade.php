@@ -23,8 +23,6 @@
             <div class="text-lg mt-4">
                 <i class="fa-solid fa-user"></i> Posted by: {{ $listing->user->name }}
             </div>
-
         </div>
     </div>
-</div>
 </x-card>
