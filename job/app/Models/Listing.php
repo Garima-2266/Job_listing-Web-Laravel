@@ -10,7 +10,7 @@ class Listing extends Model
     use HasFactory;
 
 
-    protected $fillable=['title','company','location','email','description','website','tags','user_id'];
+    protected $fillable=['title','company','location','email','description','website','tags','user_id','listing_id'];
     public function scopeFilter($query, array $filters)
     {
         if($filters['tag']??false){
@@ -27,5 +27,11 @@ class Listing extends Model
     public function user()
     {
         return $this->belongsTo(User::class,'user_id');
+    }
+
+    // Define the relationship with JobApplication
+    public function applications()
+    {
+        return $this->hasMany(JobApplication::class);
     }
 }

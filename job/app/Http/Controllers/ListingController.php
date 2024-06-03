@@ -15,17 +15,14 @@ class ListingController extends Controller
     {
         $listings = Listing::with('user')->latest()->filter(request(['tag', 'search']))->paginate(5);
 
-        return view('listings.index', [
-            'listings' => $listings
-        ]);
+        return view('listings.index', compact('listings'));
     }
 
     //show single listing
     public function show(Listing $listing)
     {
-        return view('listings.show', [
-            'listing' => $listing->load('user')
-        ]);
+        return view('listings.show', compact('listing'));
+            // 'listing' => $listing->load('user')
     }
 
     //show create form
@@ -45,7 +42,8 @@ class ListingController extends Controller
             'website' => 'required',
             'email' => 'required',
             'tags' => 'required',
-            'description' => 'required'
+            'description' => 'required',
+            'logo' => 'image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
         // Ensure the user is authenticated
         if (Auth::check()) {
@@ -90,7 +88,8 @@ class ListingController extends Controller
             'website' => 'required',
             'email' => 'required',
             'tags' => 'required',
-            'description' => 'required'
+            'description' => 'required',
+            'logo' => 'image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
 
         if ($request->hasFile('logo')) {

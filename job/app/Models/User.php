@@ -69,4 +69,10 @@ class User extends Authenticatable
         return $this->hasMany(Listing::class,'user_id');
     }
 
+    // Define the relationship with JobApplication
+    public function applications()
+    {
+        return $this->hasMany(JobApplication::class);
+    }
+
 }

@@ -24,6 +24,38 @@
                     </h3>
                     <div class="text-lg space-y-6">
                         {{ $listing->description }}
+                        <br><br>
+
+                        <!-- Apply to Job form -->
+                        <header class="text-center">
+                            <h6 class="text-2xl font-bold mb-1">
+                                Apply for {{ $listing->title }}
+                            </h6>
+                            <p class="mb-4">Submit your application</p>
+                        </header>
+                        @auth
+                        <form action="{{ route('applications.store') }}" method="post" enctype="multipart/form-data">
+                            @csrf
+
+                            <div class="mb-4">
+                                <label for="cv" class="block text-sm font-medium text-gray-700">Upload CV</label>
+                                <input type="file" name="cv" id="cv" class="mt-1 block w-full">
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="cover_letter" class="block text-sm font-medium text-gray-700">Cover Letter</label>
+                                <textarea name="cover_letter" id="cover_letter" rows="4" class="mt-1 block w-full"></textarea>
+                            </div>
+
+                            <div class="mt-6">
+                                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+                                    Submit Application
+                                </button>
+                            </div>
+                        </form>
+                        @else
+                            <p><a href="{{ route('login') }}">Log in</a> to apply for this job.</p>
+                        @endauth
 
                         <a href="mailto:{{ $listing->email }}"
                             class="block bg-laravel text-white mt-6 py-2 rounded-xl hover:opacity-80"><i
