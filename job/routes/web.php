@@ -56,4 +56,9 @@ Route::get('/login',[UserController::class,'login'])->name('login')->middleware(
 //LogIn User
 Route::post('/users/authenticate',[UserController::class,'authenticate']);
 
+// Add a route to show the apply form
+Route::get('/listings/{listing}/apply', [JobApplicationController::class, 'apply'])->name('listings.apply')->middleware('auth');
+
+// Route to store the application
 Route::post('/applications', [JobApplicationController::class, 'store'])->name('applications.store');
+
