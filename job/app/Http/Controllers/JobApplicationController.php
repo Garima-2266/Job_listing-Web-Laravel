@@ -44,5 +44,6 @@ class JobApplicationController extends Controller
 
         return redirect()->route('listings.show', $listing)
                          ->with('success', 'Application submitted successfully.');
+
     }
 }
